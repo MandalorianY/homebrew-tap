@@ -3,8 +3,8 @@ class JobScrapper < Formula
 
   desc "Job scraper and Excel application tracker for France"
   homepage "https://github.com/MandalorianY/job-scrapper"
-  url "https://github.com/MandalorianY/job-scrapper/releases/download/v0.1.0/scrapper-0.1.0.tar.gz"
-  sha256 "9f960d938d30b10b69f752d0cffe25664a0627a84f6511731711b73f51bf3770"
+  url "https://github.com/MandalorianY/job-scrapper/releases/download/v0.1.1/scrapper-0.1.1.tar.gz"
+  sha256 "c94f8b7bde6fd66efd4a3841371767dd4ed173c7f47c4c3b889d293c504f5ff5"
   license "MIT"
 
   depends_on "uv" => :build
