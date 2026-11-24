@@ -2,9 +2,9 @@ class Jobsfr < Formula
   include Language::Python::Virtualenv
 
   desc "Job scraper and Excel application tracker for France"
-  homepage "https://github.com/MandalorianY/french-job-scraper"
-  url "https://github.com/MandalorianY/french-job-scraper/releases/download/v0.2.0/scrapper-0.2.0.tar.gz"
-  sha256 "e566ae956ba153b0e8a7027bf3fba7c42a6481f71bbc898e00213a30da8caaef"
+  homepage "https://github.com/MandalorianY/jobsfr"
+  url "https://github.com/MandalorianY/jobsfr/releases/download/v0.3.0/jobsfr-0.3.0.tar.gz"
+  sha256 "2118708e813b36dca6438efdf15ada14be20df54a4d07ff27748f1f3788a617b"
   license "MIT"
 
   depends_on "uv" => :build
@@ -18,18 +18,15 @@ class Jobsfr < Formula
     ENV["UV_PYTHON_DOWNLOADS"] = "never"
     system "uv", "sync", "--locked", "--no-dev", "--no-editable", "--no-cache"
     bin.install_symlink libexec/"bin/jobsfr"
-    bin.install_symlink libexec/"bin/jobsfr-install-timer"
-    bin.install_symlink libexec/"bin/job-scrapper"
-    bin.install_symlink libexec/"bin/job-scrapper-install-timer"
 
     if OS.mac?
-      workdir = var/"job-scrapper"
+      workdir = var/"jobsfr"
       workdir.mkpath
       # Homebrew requires a packaged service file even when starting with --file.
       system libexec/"bin/python", "-c", <<~PYTHON, workdir, opt_bin/"jobsfr", prefix
         import sys
         from pathlib import Path
-        from scrapper.scheduling import HOMEBREW_LABEL, ScheduleConfig, _homebrew_plist
+        from jobsfr.cli.scheduling import HOMEBREW_LABEL, ScheduleConfig, _homebrew_plist
 
         workdir, executable, prefix = map(Path, sys.argv[1:])
         (prefix / f"{HOMEBREW_LABEL}.plist").write_bytes(_homebrew_plist(workdir, executable, ScheduleConfig(), []))
@@ -43,7 +40,8 @@ class Jobsfr < Formula
 
   test do
     assert_match "Usage: jobsfr", shell_output("#{bin}/jobsfr --help")
-    assert_match "jobsfr #{version}", shell_output("#{bin}/job-scrapper --version")
-    assert_match "--profile", shell_output("#{bin}/jobsfr-install-timer --help")
+    assert_match "jobsfr #{version}", shell_output("#{bin}/jobsfr --version")
+    assert_match "--profile", shell_output("#{bin}/jobsfr schedule enable --help")
+    assert_match "schedule disable", shell_output("#{bin}/jobsfr schedule disable --help")
   end
 end
