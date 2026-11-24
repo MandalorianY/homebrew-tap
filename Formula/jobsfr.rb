@@ -3,8 +3,8 @@ class Jobsfr < Formula
 
   desc "Job scraper and Excel application tracker for France"
   homepage "https://github.com/MandalorianY/jobsfr"
-  url "https://github.com/MandalorianY/jobsfr/releases/download/v0.3.0/jobsfr-0.3.0.tar.gz"
-  sha256 "2118708e813b36dca6438efdf15ada14be20df54a4d07ff27748f1f3788a617b"
+  url "https://github.com/MandalorianY/jobsfr/releases/download/v0.3.1/jobsfr-0.3.1.tar.gz"
+  sha256 "03bccc7b89b42bf053b150101116450dda684ded5e6e74fa46e405975d60ae50"
   license "MIT"
 
   depends_on "uv" => :build
